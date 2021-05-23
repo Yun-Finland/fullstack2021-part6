@@ -1,17 +1,47 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux'
+import reducer from './reducer.js'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const store = createStore(reducer)
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const App = () =>{
+  const increaseGood =()=>{
+    store.dispatch({
+      type: 'GOOD'
+    })
+  }
+
+  const increaseOk =()=>{
+    store.dispatch({
+      type: 'OK'
+    })
+  }
+
+  const increaseBad =()=>{
+    store.dispatch({
+      type: 'BAD'
+    })
+  }
+
+  return(
+    <div>
+      <h1>Give Feeback</h1>
+      <button onClick={increaseGood}>good</button>
+      <button onClick={increaseOk}>ok</button>
+      <button onClick={increaseBad}>bad</button>
+      <h1>Statics</h1>
+      <p>good {store.getState().good}</p>
+      <p>ok {store.getState().ok}</p>
+      <p>bad {store.getState().bad}</p>
+    </div>
+  )
+}
+
+const renderApp = () => {
+  ReactDOM.render(<App />, document.getElementById('root'))
+}
+
+renderApp()
+store.subscribe(renderApp)
