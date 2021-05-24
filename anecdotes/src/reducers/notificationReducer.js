@@ -19,16 +19,23 @@ export const createNotify = (content) => {
   
 }
 
-export const voteNotify = (content) => {
-  return{
-    type: 'SHOW_NOTIFICATION',
-    message: `You voted anecdote: "${content}"`
-  }
-}
-
 export const clearNotify = () => {
   return{
     type: 'HIDE_NOTIFICATION'
+  }
+}
+
+export const setNotification = (message, duration)=>{
+  return dispatch=>{
+    dispatch({
+      type: 'SHOW_NOTIFICATION',
+      message: message
+    })
+    setTimeout(() => {
+      dispatch({
+        type: 'HIDE_NOTIFICATION'
+      })
+    }, duration*1000)
   }
 }
 

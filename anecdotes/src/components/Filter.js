@@ -7,7 +7,7 @@ const Filter = () => {
 
   const filterAnecdote = (event) =>{
     event.preventDefault()
-    const filterCrit = event.target.value.toLowerCase()
+    const filterCrit = event.target.value
     dispatch(filterAction(filterCrit))
   }
 
