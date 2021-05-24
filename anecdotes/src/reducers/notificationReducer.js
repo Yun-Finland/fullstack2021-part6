@@ -14,7 +14,7 @@ const notificationReducer = (state="", action)=>{
 export const createNotify = (content) => {
   return{
     type: 'SHOW_NOTIFICATION',
-    message:`You created a new anecdote: ${content}`
+    message:`You created a new anecdote: "${content}"`
   }
   
 }

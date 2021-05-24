@@ -31,6 +31,8 @@ const anecdoteReducer = (state=initialState, action)=> {
         votes: anecdoteToVote.votes + 1
       }
       return state.map(anecdote => anecdote.id!==action.id ? anecdote : votedAnecdote)
+    case 'SHOW_FILTER':
+      return state.filter(anecdote => (anecdote.toLowerCase()).includes(action.filter))
     default:
       return state
   }
