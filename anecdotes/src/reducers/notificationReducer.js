@@ -11,31 +11,28 @@ const notificationReducer = (state="", action)=>{
 
 }
 
-export const createNotify = (content) => {
-  return{
-    type: 'SHOW_NOTIFICATION',
-    message:`You created a new anecdote: "${content}"`
-  }
-  
-}
-
 export const clearNotify = () => {
   return{
     type: 'HIDE_NOTIFICATION'
   }
 }
 
+let timeout
+
 export const setNotification = (message, duration)=>{
-  return dispatch=>{
+  clearTimeout(timeout)
+
+  return dispatch=>{  
     dispatch({
       type: 'SHOW_NOTIFICATION',
       message: message
     })
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       dispatch({
         type: 'HIDE_NOTIFICATION'
       })
     }, duration*1000)
+    
   }
 }
 
